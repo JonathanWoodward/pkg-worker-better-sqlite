@@ -3,12 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "pkg ."
+  },
+  "pkg": {
+    "scripts": "worker.js",
+    "assets": "node_modules/better-sqlite3/build/Release/better_sqlite3.node",
+    "targets": [
+      "node14-win-x64"
+    ],
+    "outputPath": "dist"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^7.5.0"
+  },
+  "devDependencies": {
+    "pkg": "5.5.2"
   }
 }
