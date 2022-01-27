@@ -1,5 +1,7 @@
 const { Worker } = require('worker_threads');
-const WorkerThread = require("./worker.js");
+const { join } = require('path');
+
+//const WorkerThread = require("./worker.js");
 
 /* Export a function that queues pending work. */
 const queue = [];
@@ -21,13 +23,14 @@ function spawn() {
     //const worker = new Worker("./worker.js"); // Error: Cannot find module 'worker.js'
 
     // so instead I tried this
-    const thread = WorkerThread.toString();
-    const functionBegin = thread.indexOf("{") + 1;
-    const worker = new Worker(thread.substring(functionBegin, thread.length-1), { 
-        eval: true
-    });
+    //const thread = WorkerThread.toString();
+    //const functionBegin = thread.indexOf("{") + 1;
+    //const worker = new Worker(thread.substring(functionBegin, thread.length-1), { 
+    //    eval: true
+    //});
     // but running it this way you will get the error in worker.js SyntaxError: Unexpected identifier because it can not find the node module
 
+    const worker = new Worker(join(__dirname, "worker.js"));
 
     let job = null; // Current item from the queue
     let error = null; // Error that caused the worker to crash
